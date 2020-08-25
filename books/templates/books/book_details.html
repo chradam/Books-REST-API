@@ -1,44 +1,61 @@
 {% extends "index.html" %}
 
 {% block title %}
-	<div class=row>
-		<div class="container">
-			<h3>Book</h3>
-		</div>
-	</div>
+    <div class=row>
+        <div class="container">
+            <h3>Book</h3>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-    <div id="wrapper">
-        <div class="block_div"><img src="{{ book.thumbnail }}" alt="{{ book.title }}" width="150" height="230"></div>
-        <div class="block_div"><p><b class="text-primary">Authors:</b>
-            {% for author in book.authors.all %}
-                {{ author.name }}
-            {% endfor %}</p>
-            <p><b class="text-primary">Published date:</b> {{ book.published_date }}</p>
-            <p><b class="text-primary">Categories:</b>
-                {% if book.categories %}
-                    {% for category in book.categories.all %}
-                        {{ category.name }}
-                    {% endfor %}</p>
-                {% else %}
-                    No categories.
-                {% endif %}
-
-            <p><b class="text-primary">Average rating:</b>
-                {% if book.average_rating %}
-                    {{ book.average_rating }}
-                {% else %}
-                    No value
-                {% endif %}
-            </p>
-            <p><b class="text-primary">Ratings count:</b>
-                {% if book.ratings_count %}
-                    {{ book.ratings_count }}
-                {% else %}
-                    No value
-                {% endif %}
-            </p>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong class="d-inline-block text-primary">{{ book.title }}</strong>
+                    <div class="mb-2 text-muted">{{ book.published_date }}</div>
+                    <p class="d-inline-block mb-2">
+                        <b class="text-primary">Authors:</b>
+                        {% for author in book.authors.all %}
+                            <a class="text-dark" href="#">
+                                {{ author.name }}
+                            </a>
+                        {% endfor %}
+                    </p>
+                    <p class="d-inline-block mb-2">
+                        <b class="text-primary">Categories:</b>
+                        {% if book.categories %}
+                            {% for category in book.categories.all %}
+                                {{ category.name }}
+                            {% endfor %}
+                        {% else %}
+                            No categories.
+                        {% endif %}
+                    </p>
+                    <p class="d-inline-block mb-2">
+                        <b class="text-primary">Average rating:</b>
+                        {% if book.average_rating %}
+                            {{ book.average_rating }}
+                        {% else %}
+                            No value
+                        {% endif %}
+                    </p>
+                    <p class="d-inline-block mb-2">
+                        <b class="text-primary">Ratings count:</b>
+                        {% if book.ratings_count %}
+                            {{ book.ratings_count }}
+                        {% else %}
+                            No value
+                        {% endif %}
+                    </p>
+                </div>
+                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
+                     alt="{{ book.title }}"
+                     src="{{ book.thumbnail }}"
+                     width="150"
+                     data-holder-rendered="true">
+            </div>
         </div>
     </div>
 {% endblock %}

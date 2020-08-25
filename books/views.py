@@ -42,6 +42,7 @@ def detail(request, book_id):
         book = Book.objects.get(pk=book_id)
     except Book.DoesNotExist:
         raise Http404("Book does not exist")
+
     return render(request, 'books/book_details.html', {'book': book})
 
 
@@ -49,4 +50,5 @@ def get_books(request):
     response = requests.get('https://www.googleapis.com/books/v1/volumes?q=war')
     data = response.json()
     import_books(data['items'])
+
     return redirect('/books/')
