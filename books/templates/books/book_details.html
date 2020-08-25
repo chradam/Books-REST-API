@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block title %}
+	<div class=row>
+		<div class="container">
+			<h3>Book</h3>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+        <div class="block_div"><img src="{{ book.thumbnail }}" alt="{{ book.title }}" width="150" height="230"></div>
+        <div class="block_div"><p><b class="text-primary">Authors:</b>
+            {% for author in book.authors.all %}
+                {{ author.name }}
+            {% endfor %}</p>
+            <p><b class="text-primary">Published date:</b> {{ book.published_date }}</p>
+            <p><b class="text-primary">Categories:</b>
+                {% if book.categories %}
+                    {% for category in book.categories.all %}
+                        {{ category.name }}
+                    {% endfor %}</p>
+                {% else %}
+                    No categories.
+                {% endif %}
+
+            <p><b class="text-primary">Average rating:</b>
+                {% if book.average_rating %}
+                    {{ book.average_rating }}
+                {% else %}
+                    No value
+                {% endif %}
+            </p>
+            <p><b class="text-primary">Ratings count:</b>
+                {% if book.ratings_count %}
+                    {{ book.ratings_count }}
+                {% else %}
+                    No value
+                {% endif %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
