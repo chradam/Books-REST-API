@@ -10,7 +10,7 @@ def import_books(data):
             'published_date': item['publishedDate'][:4],
             'average_rating': item.get('averageRating'),
             'ratings_count': item.get('ratingsCount'),
-            'thumbnail': item['imageLinks']['thumbnail']
+            'thumbnail': item.get('imageLinks.thumbnail', "http://placehold.jp/128x192.png")
         }
 
         book_instance, book_created = Book.objects.update_or_create(title=book['title'], published_date=book['published_date'],
